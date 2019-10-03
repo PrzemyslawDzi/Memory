@@ -8,37 +8,48 @@ class Dodawanie extends React.Component{
     constructor(){
         super();
         this.state = {
-            active : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            active : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            isTurned : false,
+            matchCard : 0
         }
     }
 
-logika (){
-        if (this.className === 'turned'){
-            console.log('działą')
-        }
-        else
-            console.log('chuja')
-}
 
     render() {
         return(
             <>
+                {console.log(this.state.matchCard)}
                 <section className={'memory-game'}>
-                    <div className={this.state.active[0] === 0 ? 'memory-card' : 'memory-card turned'} onClick={() => {this.state.active[0] === 0 ?  this.setState({active : [1,...this.state.active.slice(1,20)]}): this.setState({active : [0,...this.state.active.slice(1,20)]})}}  >
+                    <div data-match={1} className={this.state.active[0] === 0 ? 'memory-card' : 'memory-card turned'} onClick={(event) => {this.state.active[0] === 0 ?
+                        this.setState({active : [1,...this.state.active.slice(1,20)]}):
+                        this.setState({active : [0,...this.state.active.slice(1,20)]}) ;
+                        !this.state.isTurned ?  this.setState({isTurned : true}):
+                            setTimeout(() => {this.setState({active : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}); console.log(this)},1000) ;
+                            this.state.matchCard === 0 ? setTimeout(() => {this.setState({matchCard : 1})},1000) : console.log('nic nie zrobiłem')
+                    }}>
+
+
+
                         <h1 className={'front'}>jakieś coś</h1>
                         <img className={'back'} src="../images/questionmark.png" alt="questionmark" />
 
                     </div>
-                    <div className={this.state.active[1] === 0 ? 'memory-card' : 'memory-card turned'} onClick={() => {this.state.active[1] === 0 ?  this.setState({active : [this.state.active[0],1,...this.state.active.slice(2,20)]}): this.setState({active : [this.state.active[0],0,...this.state.active.slice(2,20)]})}} >
+                    <div className={this.state.active[1] === 0 ? 'memory-card' : 'memory-card turned'} onClick={(event) => {this.state.matchCard === 1 ? event.nativeEvent.stopImmediatePropagation() : console.log('niematch') ;this.state.active[1] === 0 ?
+                        this.setState({active : [this.state.active[0],1,...this.state.active.slice(2,20)]}):
+                        this.setState({active : [this.state.active[0],0,...this.state.active.slice(2,20)]}) ; !this.state.isTurned ?
+                        this.setState({isTurned : true}) : console.log('jedna już obrucona')  }} >
+
+
+
                         <h1 className={'front'}>jakieś coś</h1>
                         <img className={'back'} src="../images/questionmark.png" alt="questionmark" />
                     </div>
                     <div className={this.state.active[2] === 0 ? 'memory-card' : 'memory-card turned'} onClick={() => {this.state.active[2] === 0 ?  this.setState({active : [...this.state.active.slice(0,2),1,...this.state.active.slice(3,20)]}): this.setState({active : [...this.state.active.slice(0,2),0,...this.state.active.slice(3,20)]})}} >
-                        <h1 className={'front'}>jakieś coś</h1>
+                        <h1 className={'front'}>jakieś inne coś</h1>
                         <img className={'back'} src="../images/questionmark.png" alt="questionmark" />
                     </div>
                     <div className={this.state.active[3] === 0 ? 'memory-card' : 'memory-card turned'} onClick={() => {this.state.active[3] === 0 ?  this.setState({active : [...this.state.active.slice(0,3),1,...this.state.active.slice(4,20)]}): this.setState({active : [...this.state.active.slice(0,3),0,...this.state.active.slice(4,20)]})}} >
-                        <h1 className={'front'}>jakieś coś</h1>
+                        <h1 className={'front'}>jakieś  inne coś</h1>
                         <img className={'back'} src="../images/questionmark.png" alt="questionmark" />
                     </div>
                     <div className={this.state.active[4] === 0 ? 'memory-card' : 'memory-card turned'} onClick={() => {this.state.active[4] === 0 ?  this.setState({active : [...this.state.active.slice(0,4),1,...this.state.active.slice(5,20)]}): this.setState({active : [...this.state.active.slice(0,4),0,...this.state.active.slice(5,20)]})}} >
