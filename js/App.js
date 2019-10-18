@@ -23,7 +23,7 @@ class Card extends React.Component {
                         <img src="../images/questionmark.png" alt="question"/>
                     </div>
                     <div className="front">
-                        <img src={"../images/" + this.props.doggo + ".jpg"}/>
+                        <img src={"../images/" + this.props.doggo + ".png"}/>
                     </div>
                 </div>
             </>
